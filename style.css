@@ -1,0 +1,601 @@
+@font-face {
+  font-family: 'VPPixel-Simplified';
+  src: url('./attached_assets/VPPixel-Simplified_1758301883221.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* Prevent focus outline on mobile only */
+@media (hover: none) and (pointer: coarse) {
+
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+:root {
+  --vh: 1vh;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Dynamic viewport height for mobile */
+  min-height: -webkit-fill-available;
+  /* WebKit fallback */
+  padding: 10px;
+  margin: 0;
+}
+
+.calculator {
+  background: #4d4d4d;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    0 3px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 400px;
+  min-width: 300px;
+  border: 2px solid #444;
+  /* Full screen on mobile */
+  height: 100vh;
+  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Calculator Header */
+.calculator-header {
+  color: #ccc;
+  text-align: left;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.model {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+.subtitle {
+  font-size: 8px;
+  color: #888;
+}
+
+.edition {
+  font-size: 8px;
+  color: #666;
+  position: absolute;
+  right: 35px;
+  top: 35px;
+}
+
+/* Display Container */
+.display-container {
+  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+  border-radius: 8px;
+  padding: 3px;
+  margin: 10px 0 15px 0;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(255, 255, 255, 0.05);
+  border: 2px solid #000;
+  position: relative;
+}
+
+.display {
+  background: linear-gradient(145deg, #e8f4e8, #ddeedd);
+  border-radius: 4px;
+  padding: 35px 15px;
+  min-height: 160px;
+  position: relative;
+  border: 1px solid #ccc;
+}
+
+.display-top {
+  display: none;
+}
+
+.display-main {
+  font-family: 'VPPixel-Simplified', 'Consolas', 'Monaco', 'Lucida Console', monospace;
+  font-size: clamp(28px, 7vw, 36px);
+  font-weight: normal;
+  color: #000;
+  text-align: left;
+  letter-spacing: 1px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #000;
+  margin-left: 2px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Navigation Arrows */
+.nav-arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px auto;
+}
+
+.arrow-background {
+  background: #404040;
+  border-radius: 20px;
+  width: 100px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+.arrow-spacer {
+  width: 35px;
+  height: 25px;
+}
+
+.arrow-img {
+  width: 45px;
+  height: 45px;
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+  transition: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  box-sizing: border-box;
+  margin: -25px 0;
+}
+
+.arrow-img.up {
+  transform: rotate(90deg) scaleY(-1);
+}
+
+.arrow-img.left {
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.arrow-img.right {
+  transform: rotate(0deg) scaleX(-1);
+}
+
+.arrow-img.down {
+  transform: rotate(-90deg) scaleY(-1);
+}
+
+.center-dot {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.center-dot::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #666;
+}
+
+/* Side Buttons */
+.side-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+.circular-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #808080;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.circular-btn:hover {
+  background: #707070;
+}
+
+.circular-btn:active {
+  background: #606060;
+}
+
+.arrow-img:active {
+  opacity: 0.7;
+}
+
+/* Button Grid */
+.button-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.button-row {
+  display: flex;
+  gap: 2px;
+}
+
+/* Button Base Styles */
+.btn {
+  border: none;
+  border-radius: 4px;
+  font-size: clamp(8px, 2.2vw, 12px);
+  font-weight: bold;
+  cursor: pointer;
+  transition: none;
+  min-height: clamp(28px, 8vh, 45px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  flex: 1;
+  padding: 2px;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Secondary text styling */
+.secondary {
+  font-size: clamp(6px, 1.5vw, 8px);
+  color: #666;
+  margin-top: 1px;
+  font-weight: normal;
+}
+
+/* Button Type Styles */
+.function-btn {
+  background: linear-gradient(145deg, #444, #333);
+  color: #fff;
+  font-size: 9px;
+}
+
+.function-btn .secondary {
+  color: #aaa;
+}
+
+.small-btn {
+  background: linear-gradient(145deg, #444, #333);
+  color: #fff;
+  font-size: 8px;
+  min-height: 28px;
+}
+
+.small-btn .secondary {
+  color: #aaa;
+}
+
+.number-btn {
+  background: linear-gradient(145deg, #555, #444);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.number-btn.light-grey {
+  background: linear-gradient(145deg, #888, #777);
+  color: #fff;
+}
+
+.number-btn .secondary {
+  color: #bbb;
+}
+
+.operation-btn {
+  background: linear-gradient(145deg, #444, #333);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.operation-btn .secondary {
+  color: #bbb;
+}
+
+/* Special Button Colors */
+.orange-btn {
+  background: linear-gradient(145deg, #ff8c00, #e67300) !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.bright-green-btn {
+  background: linear-gradient(145deg, #32cd32, #228b22) !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.gray-btn {
+  background: linear-gradient(145deg, #666, #555) !important;
+  color: #fff !important;
+}
+
+.dark-equals-btn {
+  background: linear-gradient(145deg, #333, #222) !important;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Special sizing */
+.zero-btn {
+  flex: 1.2;
+}
+
+/* Row-specific adjustments */
+.button-row:nth-child(1) .btn {
+  min-height: 25px;
+  font-size: 8px;
+}
+
+.button-row:nth-child(2) .btn,
+.button-row:nth-child(3) .btn,
+.button-row:nth-child(4) .btn {
+  min-height: 30px;
+}
+
+.button-row:nth-child(5) .btn,
+.button-row:nth-child(6) .btn,
+.button-row:nth-child(7) .btn,
+.button-row:nth-child(8) .btn {
+  min-height: 32px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .calculator {
+    width: 95%;
+    max-width: 320px;
+  }
+
+  .btn {
+    font-size: 9px;
+    min-height: 28px;
+  }
+}
+
+/* Animation for button press */
+@keyframes buttonPress {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.btn.pressed {
+  animation: buttonPress 0.05s ease;
+}
+
+/* Display animation */
+.display-main.calculating {
+  opacity: 0.7;
+}
+
+.display-main.error {
+  color: #d32f2f;
+}
+
+/* Focus styles for accessibility - removed blue outline */
+.btn:focus {
+  outline: none;
+}
+
+/* Mobile-specific optimizations - Edge to Edge */
+@media screen and (max-width: 480px) {
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .calculator {
+    border-radius: 0;
+    padding: 8px;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: -webkit-fill-available;
+    border: none;
+    max-width: none;
+    min-width: none;
+    /* Ensure it touches all edges */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .display-container {
+    margin: 5px 0 8px 0;
+  }
+
+  .display {
+    padding: 25px 10px;
+    min-height: 120px;
+  }
+
+  .btn {
+    min-height: clamp(30px, 8.5vh, 48px);
+    font-size: clamp(9px, 2.3vw, 13px);
+  }
+
+  .calculator-header {
+    margin-bottom: 6px;
+  }
+
+  .calculator-header .brand {
+    font-size: clamp(13px, 3.8vw, 17px);
+  }
+
+  .calculator-header .model {
+    font-size: clamp(7px, 2.2vw, 11px);
+  }
+
+  .calculator-header .subtitle {
+    font-size: clamp(6px, 1.8vw, 9px);
+  }
+}
+
+/* Landscape mode adjustments for mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .calculator {
+    border-radius: 0;
+    padding: 6px;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: -webkit-fill-available;
+    border: none;
+    max-width: none;
+    min-width: none;
+  }
+
+  .calculator-header {
+    margin-bottom: 3px;
+  }
+
+  .display-container {
+    margin: 3px 0 5px 0;
+  }
+
+  .display {
+    padding: 18px 8px;
+    min-height: 85px;
+  }
+
+  .btn {
+    min-height: clamp(22px, 11vh, 32px);
+    font-size: clamp(7px, 1.8vw, 10px);
+  }
+
+  .button-grid {
+    gap: 1px;
+  }
+
+  .button-row {
+    gap: 1px;
+  }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    transition: none;
+    touch-action: manipulation;
+  }
+  
+  .btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  .btn:hover {
+    opacity: 1;
+  }
+}

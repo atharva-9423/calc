@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <!-- PWA meta tags for full screen mobile experience -->
+    <meta name="theme-color" content="#2a2a2a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Scientific Calculator" />
+    <meta name="apple-mobile-web-app-title" content="Calculator" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <title>Scientific Calculator - Casio fx-991ES PLUS</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="calculator">
+      <!-- Calculator Brand and Model -->
+      <div class="calculator-header">
+        <div class="brand">CASIO</div>
+        <div class="model">fx-991ES PLUS</div>
+        <div class="subtitle">NATURAL DISPLAY</div>
+      </div>
+
+      <!-- Display Screen -->
+      <div class="display-container">
+        <div class="display">
+          <div class="display-main" id="display">0</div>
+        </div>
+      </div>
+
+      <!-- Side Buttons -->
+      <div class="side-buttons">
+        <button class="circular-btn" data-function="button1"></button>
+        <button class="circular-btn" data-function="button2"></button>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <div class="nav-arrows arrow-background">
+        <div class="arrow-row">
+          <div class="arrow-spacer"></div>
+          <img src="attached_assets/Group 1_1758305233637.png" alt="up" class="arrow-img up" data-function="nav-up">
+          <div class="arrow-spacer"></div>
+        </div>
+        <div class="arrow-row">
+          <img src="attached_assets/Group 1_1758305233637.png" alt="left" class="arrow-img left" data-function="nav-left">
+          <div class="arrow-spacer"></div>
+          <img src="attached_assets/Group 1_1758305233637.png" alt="right" class="arrow-img right" data-function="nav-right">
+        </div>
+        <div class="arrow-row">
+          <div class="arrow-spacer"></div>
+          <img src="attached_assets/Group 1_1758305233637.png" alt="down" class="arrow-img down" data-function="nav-down">
+          <div class="arrow-spacer"></div>
+        </div>
+      </div>
+
+      <!-- Calculator Buttons -->
+      <div class="button-grid">
+        <!-- Row 1: Top Function Buttons -->
+        <div class="button-row">
+          <button class="btn function-btn orange-btn" data-function="shift">
+            SHIFT
+          </button>
+          <button class="btn function-btn orange-btn" data-function="alpha">
+            ALPHA
+          </button>
+          <button class="btn function-btn gray-btn" data-function="mode">
+            MODE
+          </button>
+          <button class="btn function-btn gray-btn" data-function="setup">
+            SETUP
+          </button>
+          <button class="btn function-btn gray-btn" data-function="on">
+            ON
+          </button>
+        </div>
+
+        <!-- Row 2: Math Functions Row 1 -->
+        <div class="button-row">
+          <button class="btn small-btn" data-function="solve">
+            SOLVE<br /><span class="secondary">CALC</span>
+          </button>
+          <button class="btn small-btn" data-function="integral">
+            ∫<br /><span class="secondary">d/dx</span>
+          </button>
+          <button class="btn small-btn" data-function="matrix">
+            ⌊⌋<br /><span class="secondary">√</span>
+          </button>
+          <button class="btn small-btn" data-function="power">
+            x^y<br /><span class="secondary">log₁₀</span>
+          </button>
+          <button class="btn small-btn" data-function="ln">
+            ln<br /><span class="secondary">logₐᵦ</span>
+          </button>
+        </div>
+
+        <!-- Row 3: Math Functions Row 2 -->
+        <div class="button-row">
+          <button class="btn small-btn" data-function="neg">
+            (-)<br /><span class="secondary">∃∀∃</span>
+          </button>
+          <button class="btn small-btn" data-function="degree">
+            °'"<br /><span class="secondary">hyp</span>
+          </button>
+          <button class="btn small-btn" data-function="sin">
+            sin<br /><span class="secondary">sin⁻¹</span>
+          </button>
+          <button class="btn small-btn" data-function="cos">
+            cos<br /><span class="secondary">cos⁻¹</span>
+          </button>
+          <button class="btn small-btn" data-function="tan">
+            tan<br /><span class="secondary">tan⁻¹</span>
+          </button>
+        </div>
+
+        <!-- Row 4: Math Functions Row 3 -->
+        <div class="button-row">
+          <button class="btn small-btn" data-function="rcl">
+            RCL<br /><span class="secondary">STO</span>
+          </button>
+          <button class="btn small-btn" data-function="eng">
+            ENG<br /><span class="secondary">←</span>
+          </button>
+          <button class="btn small-btn" data-function="parenthesis-open">
+            (<br /><span class="secondary">{</span>
+          </button>
+          <button class="btn small-btn" data-function="parenthesis-close">
+            )<br /><span class="secondary">}</span>
+          </button>
+          <button class="btn small-btn" data-function="s-sum">
+            S⇔D<br /><span class="secondary">M+</span>
+          </button>
+        </div>
+
+        <!-- Row 5: Numbers and Operations Row 1 -->
+        <div class="button-row">
+          <button class="btn number-btn" data-function="const">
+            CONST<br /><span class="secondary">CONV</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="7">
+            7<br /><span class="secondary">x!</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="8">
+            8<br /><span class="secondary">nPr</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="9">
+            9<br /><span class="secondary">nCr</span>
+          </button>
+          <button
+            class="btn operation-btn bright-green-btn"
+            data-function="del"
+          >
+            DEL
+          </button>
+          <button class="btn operation-btn bright-green-btn" data-function="ac">
+            AC
+          </button>
+        </div>
+
+        <!-- Row 6: Numbers and Operations Row 2 -->
+        <div class="button-row">
+          <button class="btn function-btn" data-function="fraction">
+            a b/c<br /><span class="secondary">d/c</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="4">
+            4<br /><span class="secondary">CMPLX</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="5">
+            5<br /><span class="secondary">BASE-N</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="6">
+            6<br /><span class="secondary">Pol</span>
+          </button>
+          <button class="btn operation-btn" data-function="multiply">×</button>
+          <button class="btn operation-btn" data-function="divide">
+            ÷<br /><span class="secondary">Rec</span>
+          </button>
+        </div>
+
+        <!-- Row 7: Numbers and Operations Row 3 -->
+        <div class="button-row">
+          <button class="btn function-btn" data-function="sqrt">
+            √<br /><span class="secondary">∛</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="1">
+            1<br /><span class="secondary">Rnd</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="2">
+            2<br /><span class="secondary">Ran#</span>
+          </button>
+          <button class="btn number-btn light-grey" data-number="3">
+            3<br /><span class="secondary">π</span>
+          </button>
+          <button class="btn operation-btn" data-function="add">+</button>
+          <button class="btn operation-btn" data-function="subtract">
+            -<br /><span class="secondary">DRG▶</span>
+          </button>
+        </div>
+
+        <!-- Row 8: Bottom Row -->
+        <div class="button-row">
+          <button class="btn function-btn" data-function="x-power-y">
+            x²<br /><span class="secondary">√x</span>
+          </button>
+          <button class="btn number-btn light-grey zero-btn" data-number="0">
+            0<br /><span class="secondary">Rnd</span>
+          </button>
+          <button class="btn function-btn" data-function="decimal">.</button>
+          <button class="btn function-btn" data-function="exp">×10ˣ</button>
+          <button class="btn function-btn" data-function="ans">
+            Ans<br /><span class="secondary">DRG</span>
+          </button>
+          <button
+            class="btn operation-btn dark-equals-btn"
+            data-function="equals"
+          >
+            =
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
